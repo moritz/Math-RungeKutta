@@ -18,7 +18,7 @@ sub rk-integrate (
                 :@values,
                 :$parameter,
                 :&derivative,
-                :step,
+                :$step,
         );
         $parameter = @values.shift;
         do($parameter, @values);
