@@ -31,13 +31,13 @@ sub runge-kutta(:@values, :&derivative,
 }
 
 # Euler's algorithm
-multi sub rk(:@values, :&derivative, :$parameter, :$step = 0.1, :$order where 1) {
+multi sub rk(:@values, :&derivative, :$parameter, :$step, :$order where 1) {
     my @new_y = @values >>+<< ($step <<*<< derivative($parameter, @values));
     return ($parameter + $step, @new_y);
 }
 
 # Heun's method
-multi sub rk(:@values, :&derivative, :$parameter, :$step = 0.1, :$order where 2) {
+multi sub rk(:@values, :&derivative, :$parameter, :$step, :$order where 2) {
     my @k1 = $step <<*<< derivative($parameter, @values);
     my @k2 = $step <<*<< derivative($parameter+$step, @values >>+<< @k1);
     my @result = @values >>+<< (1/2) <<*<< (@k1 >>+<< @k2);
@@ -45,7 +45,7 @@ multi sub rk(:@values, :&derivative, :$parameter, :$step = 0.1, :$order where 2)
 }
 
 # classical RK4
-multi sub rk(:@values, :&derivative, :$parameter, :$step = 0.1, :$order where 4) {
+multi sub rk(:@values, :&derivative, :$parameter, :$step, :$order where 4) {
     my @k1 = $step <<*<< derivative($parameter, @values);
     my @k2 = $step <<*<< derivative($parameter + $step/2, [@values >>+<< @k1 >>/>> 2]);
     my @k3 = $step <<*<< derivative($parameter + $step/2, [@values >>+<< @k2 >>/>>2]);
