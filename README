@@ -44,3 +44,7 @@ $ PERL6LIB=lib perl6 synopsis.pl | xmgrace -nxy -
 
 The interfaces is inspired by Perl 5 module Math::RungeKutta, to be found at
 <http://search.cpan.org/perldoc?Math::RungeKutta>.
+
+Caveat: this module lacks the step width adaption that the Perl 5 modules
+does. If somebody wants to hack that in, plese contact the author at moritz at
+faui2k3.org.
